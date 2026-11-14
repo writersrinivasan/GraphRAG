@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #07051a;
+  --foreground: #f5f3ff;
 }
 
 @theme inline {
@@ -12,15 +12,88 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgba(168, 85, 247, 0.28), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(34, 211, 238, 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 110%, rgba(236, 72, 153, 0.16), transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+  }
+  .grad-text {
+    background: linear-gradient(90deg, #f0abfc, #c084fc, #67e8f9, #fde68a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .prose-chat p { margin: 0.4rem 0; }
+  .prose-chat ul { list-style: disc; padding-left: 1.25rem; margin: 0.4rem 0; }
+  .prose-chat ol { list-style: decimal; padding-left: 1.25rem; margin: 0.4rem 0; }
+  .prose-chat li { margin: 0.15rem 0; }
+  .prose-chat h1, .prose-chat h2, .prose-chat h3 { font-weight: 700; margin: 0.6rem 0 0.3rem; }
+  .prose-chat code { background: rgba(255,255,255,0.1); padding: 0.05rem 0.3rem; border-radius: 0.3rem; font-size: 0.85em; }
+  .prose-chat pre { background: rgba(0,0,0,0.45); padding: 0.75rem; border-radius: 0.75rem; overflow-x: auto; margin: 0.5rem 0; }
+  .prose-chat pre code { background: none; padding: 0; }
+  .prose-chat table { border-collapse: collapse; margin: 0.5rem 0; font-size: 0.85em; }
+  .prose-chat th, .prose-chat td { border: 1px solid rgba(255,255,255,0.15); padding: 0.3rem 0.6rem; }
+  .prose-chat th { background: rgba(255,255,255,0.08); }
+  .prose-chat a { color: #67e8f9; text-decoration: underline; }
+  .prose-chat strong { color: #f5d0fe; }
+}
+
+@keyframes flow {
+  to { stroke-dashoffset: -20; }
+}
+.edge-flow {
+  stroke-dasharray: 6 4;
+  animation: flow 0.8s linear infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.6; }
+}
+.pulse-ring { animation: pulse-ring 1.6s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.5s ease-out both; }
+
+@keyframes dash-move {
+  to { stroke-dashoffset: -24; }
+}
+.dash-move { stroke-dasharray: 6 6; animation: dash-move 1s linear infinite; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  .edge-flow, .pulse-ring, .float, .fade-up, .dash-move { animation: none; }
 }
